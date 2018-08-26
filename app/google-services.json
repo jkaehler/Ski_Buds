@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "999017806645",
+    "firebase_url": "https://skibudz-c1c94.firebaseio.com",
+    "project_id": "skibudz-c1c94",
+    "storage_bucket": "skibudz-c1c94.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:999017806645:android:1a3abede15ea412f",
+        "android_client_info": {
+          "package_name": "com.example.johnkaehler.ski_buds"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "999017806645-f9g5o85vtcrpsuf38omr5lms49am53rk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDcjK1qQ_F5zfzRuJvrvOuO5p_vUCBR0B4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
