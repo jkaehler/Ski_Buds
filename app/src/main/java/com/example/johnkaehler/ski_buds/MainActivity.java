@@ -2,6 +2,10 @@
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -52,6 +56,9 @@ public class MainActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 // Successfully signed in
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                MiddleFragment middleFragment = new MiddleFragment();
+                ft.add(R.id.fragment_container, middleFragment).commit();
                 // ...
             } else {
                 // Sign in failed. If response is null the user canceled the
@@ -61,4 +68,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
+
 }
