@@ -24,6 +24,15 @@ public class MainActivity extends AppCompatActivity {
 
     FragmentPagerAdapter adapterViewPager;
     ViewPager viewPager;
+    String mDisplayName;
+
+    public String getDisplayName() {
+        return mDisplayName;
+    }
+
+    public void setDisplayName(String displayName) {
+        mDisplayName = displayName;
+    }
 
     private static final int RC_SIGN_IN = 123;
     List providers = Arrays.asList(
@@ -34,10 +43,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        viewPager = findViewById(R.id.vpPager);
-        adapterViewPager = new MyPagerAdapter(getSupportFragmentManager());
-        viewPager.setAdapter(adapterViewPager);
-        viewPager.setCurrentItem(1);
+
 
             startActivityForResult(
                 AuthUI.getInstance()
@@ -64,12 +70,13 @@ public class MainActivity extends AppCompatActivity {
 
             if (resultCode == RESULT_OK) {
                 // Successfully signed in
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                String displayName = user.getDisplayName();
 
+                this.setDisplayName(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
+                viewPager = findViewById(R.id.vpPager);
+                adapterViewPager = new MyPagerAdapter(getSupportFragmentManager(), mDisplayName);
+                viewPager.setAdapter(adapterViewPager);
+                viewPager.setCurrentItem(1);
 
-                //Bundle bundle = new Bundle();
-                //bundle.putString("display_name", displayName);
                 //FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                 //MiddleFragment middleFragment = new MiddleFragment();
                 //middleFragment.setArguments(bundle);
@@ -86,9 +93,11 @@ public class MainActivity extends AppCompatActivity {
 
     public static class MyPagerAdapter extends FragmentPagerAdapter{
         private final static int NUM_ITEMS = 3;
+        String mDisplayName;
 
-        public MyPagerAdapter(FragmentManager fragmentManager){
+        public MyPagerAdapter(FragmentManager fragmentManager, String displayName){
             super(fragmentManager);
+            this.mDisplayName = displayName;
         }
 
         @Override
@@ -97,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
                 case 0:
                     return LeftFragment.newInstance();
                 case 1:
-                    return MiddleFragment.newInstance();
+                    return MiddleFragment.newInstance(mDisplayName);
                 case 2:
                     return RightFragment.newInstance();
                 default:
